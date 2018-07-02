@@ -1,23 +1,48 @@
 <template>
-  <div id="app">
-    <img src="./assets/logo.png">
-    <router-view/>
+  <div>
+    <header class="site-header jumbotron">
+      <div class="container">
+        <div class="row">
+          <div class="col-xs-12">
+            <h1>请发表对React的评论</h1>
+          </div>
+        </div>
+      </div>
+    </header>
+    <div class="container">
+      <Add  :addComents="addComents"/>
+      <List :comments="comments" :deleteComents="deleteComents"/>
+    </div>
   </div>
 </template>
-
 <script>
-export default {
-  name: 'App'
-}
-</script>
+  import Add from './components/Add.vue'
+  import List from './components/List.vue'
+  export default {
+    components:{
+      Add,
+      List
+    },
+    data(){
+     return {
+       comments:[
+         {name:'张三', content:"Vue"}
+       ]
 
+     }
+    },
+    methods:{
+      addComents(comment){
+       this.comments.unshift(comment)
+      },
+      deleteComents(index){
+        this.comments.splice(index,1)
+      }
+    }
+
+  }
+
+</script>
 <style>
-#app {
-  font-family: 'Avenir', Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
-}
+
 </style>
